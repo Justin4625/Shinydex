@@ -1,7 +1,7 @@
 window.addEventListener('load', init);
 
 //Globals
-const apiUrl = 'https://pokeapi.co/api/v2/pokemon?limit=1025';
+const apiUrl = 'https://pokeapi.co/api/v2/pokemon?limit=2000';
 let pokemonData = {};
 let gallery;
 let dialog;
@@ -61,6 +61,14 @@ function succesHandler(data) {
     let paldeaStartAdded = false;
 
     for (const pokemon of data.results) {
+        // Get Pokémon ID from the URL
+        const pokemonId = parseInt(pokemon.url.split('/').slice(-2)[0]);
+
+        // Exclude Pokémon from #10001 to #10090
+        if ((pokemonId >= 10001 && pokemonId <= 10090) || (pokemonId == 10093) || (pokemonId >= 10094 && pokemonId <= 10099) || (pokemonId >= 10116 && pokemonId <= 10125) || (pokemonId >= 10127 && pokemonId <= 10151) || (pokemonId >= 10153 && pokemonId <= 10160)) {
+            continue; // Skip this iteration if the Pokémon ID is in the excluded ranges
+        }
+
         let newDiv = document.createElement('div');
         newDiv.classList.add('pokemon-card');
         newDiv.dataset.name = pokemon.name;
@@ -279,10 +287,6 @@ function succesHandler(data) {
     }
 }
 
-
-
-
-
 function pokemonSuccesHandler(apiData) {
     let div = document.querySelector(`.pokemon-card[data-name='${apiData.name}']`);
 
@@ -299,8 +303,6 @@ function pokemonSuccesHandler(apiData) {
     button.innerText = "Show shiny✨"; // Dit kun je nu eventueel weghalen
     button.dataset.id = apiData.id;
     div.appendChild(button);
-
-    pokemonData[apiData.id] = apiData;
 }
 
 function pokemonClickHandler(e) {
