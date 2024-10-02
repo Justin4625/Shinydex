@@ -50,6 +50,7 @@ function getData(url, succesFunction) {
 }
 
 function succesHandler(data) {
+    let kantoStartAdded = false;
     let johtoStartAdded = false;
     let hoennStartAdded = false;
     let sinnohStartAdded = false;
@@ -59,23 +60,38 @@ function succesHandler(data) {
     let galarStartAdded = false;
     let hisuiStartAdded = false;
     let paldeaStartAdded = false;
+    let regionalFormsStartAdded = false;
 
     for (const pokemon of data.results) {
         // Get Pokémon ID from the URL
         const pokemonId = parseInt(pokemon.url.split('/').slice(-2)[0]);
 
         // Exclude Pokémon from #10001 to #10090
-        if ((pokemonId >= 10001 && pokemonId <= 10090) || (pokemonId == 10093) || (pokemonId >= 10094 && pokemonId <= 10099) || (pokemonId >= 10116 && pokemonId <= 10160) || (pokemonId === 10178) || (pokemonId >= 10181 && pokemonId <= 10228)) {
+        if ((pokemonId >= 10001 && pokemonId <= 10090) || (pokemonId == 10093) || (pokemonId >= 10094 && pokemonId <= 10099) || (pokemonId >= 10116 && pokemonId <= 10160) || (pokemonId === 10178) || (pokemonId >= 10181 && pokemonId <= 10228) || (pokemonId >= 10245 && pokemonId <= 10246) || (pokemonId >= 10248 && pokemonId <= 10249) || (pokemonId >= 10251 && pokemonId <= 10252) || (pokemonId >= 10254 && pokemonId <= 10277)) {
             continue; // Skip this iteration if the Pokémon ID is in the excluded ranges
         }
 
-        let newDiv = document.createElement('div');
-        newDiv.classList.add('pokemon-card');
-        newDiv.dataset.name = pokemon.name;
-        gallery.appendChild(newDiv);
+        if (!kantoStartAdded && pokemon.url.includes('/1/')) {
+            let breakElement = document.createElement('div');
+            breakElement.classList.add('region-break');
+            gallery.appendChild(breakElement);
+
+            let regionContainer = document.createElement('div');
+            regionContainer.classList.add('region-container');
+            regionContainer.id = 'kanto';  // Voeg dit ID toe
+            gallery.appendChild(regionContainer);
+
+            let kantoImage = document.createElement('img');
+            kantoImage.src = './img/kanto.png'; // Zorg ervoor dat je het juiste pad gebruikt
+            kantoImage.alt = "Kanto Region";
+            kantoImage.classList.add('region-image');
+            regionContainer.appendChild(kantoImage);
+
+            kantoStartAdded = true; // Markeer dat Kanto is toegevoegd
+        }
 
         // Kanto regio (0-151)
-        if (!johtoStartAdded && pokemon.url.includes('/151/')) {
+        if (!johtoStartAdded && pokemon.url.includes('/152/')) {
             let breakElement = document.createElement('div');
             breakElement.classList.add('region-break');
             gallery.appendChild(breakElement);
@@ -95,7 +111,7 @@ function succesHandler(data) {
         }
 
         // Johto regio (152-251)
-        if (!hoennStartAdded && pokemon.url.includes('/251/')) {
+        if (!hoennStartAdded && pokemon.url.includes('/252/')) {
             let breakElement = document.createElement('div');
             breakElement.classList.add('region-break');
             gallery.appendChild(breakElement);
@@ -117,7 +133,7 @@ function succesHandler(data) {
         }
 
         // Sinnoh regio (386-493)
-        if (!sinnohStartAdded && pokemon.url.includes('/386/')) {
+        if (!sinnohStartAdded && pokemon.url.includes('/387/')) {
             let breakElement = document.createElement('div');
             breakElement.classList.add('region-break');
             gallery.appendChild(breakElement);
@@ -139,7 +155,7 @@ function succesHandler(data) {
         }
 
         // Unova regio (494-649)
-        if (!unovaStartAdded && pokemon.url.includes('/493/')) {
+        if (!unovaStartAdded && pokemon.url.includes('/494/')) {
             let breakElement = document.createElement('div');
             breakElement.classList.add('region-break');
             gallery.appendChild(breakElement);
@@ -161,7 +177,7 @@ function succesHandler(data) {
         }
 
         // Kalos regio (650-721)
-        if (!kalosStartAdded && pokemon.url.includes('/649/')) {
+        if (!kalosStartAdded && pokemon.url.includes('/650/')) {
             let breakElement = document.createElement('div');
             breakElement.classList.add('region-break');
             gallery.appendChild(breakElement);
@@ -183,29 +199,27 @@ function succesHandler(data) {
         }
 
         // Alola regio (722-809)
-        if (!alolaStartAdded && pokemon.url.includes('/721/')) {
+        if (pokemonId === 722 && !alolaStartAdded) {
             let breakElement = document.createElement('div');
             breakElement.classList.add('region-break');
             gallery.appendChild(breakElement);
 
-            // Maak een container voor de afbeelding en de naam
             let regionContainer = document.createElement('div');
-            regionContainer.classList.add('region-container'); // Voeg een klasse toe voor styling
-            regionContainer.id = 'alola';  // Voeg dit ID toe
+            regionContainer.classList.add('region-container');
+            regionContainer.id = 'alola';
             gallery.appendChild(regionContainer);
 
-            // Voeg de Alola afbeelding toe
             let alolaImage = document.createElement('img');
-            alolaImage.src = './img/alola.png'; // Zorg ervoor dat je het juiste pad gebruikt
-            alolaImage.alt = "Alola Region"; // Alt-tekst voor de afbeelding
-            alolaImage.classList.add('region-image'); // Voeg een klasse toe voor styling
+            alolaImage.src = './img/alola.png';
+            alolaImage.alt = "Alola Region";
+            alolaImage.classList.add('region-image');
             regionContainer.appendChild(alolaImage);
 
             alolaStartAdded = true;
         }
 
         // Galar regio (810-898)
-        if (!galarStartAdded && pokemon.url.includes('/809/')) {
+        if (!galarStartAdded && pokemon.url.includes('/810/')) {
             let breakElement = document.createElement('div');
             breakElement.classList.add('region-break');
             gallery.appendChild(breakElement);
@@ -227,7 +241,7 @@ function succesHandler(data) {
         }
 
         // Hisui regio (899-905)
-        if (!hisuiStartAdded && pokemon.url.includes('/898/')) {
+        if (!hisuiStartAdded && pokemon.url.includes('/899/')) {
             let breakElement = document.createElement('div');
             breakElement.classList.add('region-break');
             gallery.appendChild(breakElement);
@@ -255,7 +269,7 @@ function succesHandler(data) {
         }
 
         // Paldea regio (906+)
-        if (!paldeaStartAdded && pokemon.url.includes('/905/')) {
+        if (!paldeaStartAdded && pokemon.url.includes('/906/')) {
             let breakElement = document.createElement('div');
             breakElement.classList.add('region-break');
             gallery.appendChild(breakElement);
@@ -281,6 +295,38 @@ function succesHandler(data) {
 
             paldeaStartAdded = true;
         }
+
+        if (!regionalFormsStartAdded && pokemon.url.includes('/10091/')) {
+            let breakElement = document.createElement('div');
+            breakElement.classList.add('region-break');
+            gallery.appendChild(breakElement);
+
+            // Maak een container voor de afbeelding en de naam
+            let regionContainer = document.createElement('div');
+            regionContainer.classList.add('region-container'); // Voeg een klasse toe voor styling
+            regionContainer.id = 'regional forms';  // Voeg dit ID toe
+            gallery.appendChild(regionContainer);
+
+            // Voeg de Paldea afbeelding toe
+            let regionalFormsImage = document.createElement('img');
+            regionalFormsImage.src = './img/regionals.jpg'; // Zorg ervoor dat je het juiste pad gebruikt
+            regionalFormsImage.alt = "Regional forms"; // Alt-tekst voor de afbeelding
+            regionalFormsImage.classList.add('region-image'); // Voeg een klasse toe voor styling
+            regionContainer.appendChild(regionalFormsImage);
+
+            // Voeg de regio naam toe in een overlay
+            let regionName = document.createElement('div');
+            regionName.classList.add('region-name-regionals'); // Voeg een klasse toe voor styling
+            regionName.innerText = 'Regional Forms'; // Zet de naam van de regio in de balk
+            regionContainer.appendChild(regionName);
+
+            regionalFormsStartAdded = true;
+        }
+
+        let newDiv = document.createElement('div');
+        newDiv.classList.add('pokemon-card');
+        newDiv.dataset.name = pokemon.name;
+        gallery.appendChild(newDiv);
 
         // Pokémon details ophalen
         getData(pokemon.url, pokemonSuccesHandler);
