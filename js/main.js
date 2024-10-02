@@ -11,6 +11,21 @@ let dialogContent;
  * Initialize after the DOM is ready
  */
 function init() {
+    const toggleNavButton = document.getElementById('toggle-nav');
+    const nav = document.getElementById('region-nav');
+
+    toggleNavButton.addEventListener('click', () => {
+        nav.classList.toggle('hidden');
+    });
+
+    // Add event listeners to each region link to hide the navbar upon selection
+    const navLinks = nav.querySelectorAll('a');
+    navLinks.forEach(link => {
+        link.addEventListener('click', () => {
+            nav.classList.add('hidden'); // Hide the navbar
+        });
+    });
+
     gallery = document.getElementById('pokemon-gallery');
     gallery.addEventListener("click", pokemonClickHandler);
 
@@ -56,19 +71,18 @@ function succesHandler(data) {
             let breakElement = document.createElement('div');
             breakElement.classList.add('region-break');
             gallery.appendChild(breakElement);
-
-            // Maak een container voor de afbeelding en de naam
+        
             let regionContainer = document.createElement('div');
-            regionContainer.classList.add('region-container'); // Voeg een klasse toe voor styling
+            regionContainer.classList.add('region-container');
+            regionContainer.id = 'johto';  // Voeg dit ID toe
             gallery.appendChild(regionContainer);
-
-            // Voeg de Johto afbeelding toe
+        
             let johtoImage = document.createElement('img');
-            johtoImage.src = './img/johto.png'; // Zorg ervoor dat je het juiste pad gebruikt
-            johtoImage.alt = "Johto Region"; // Alt-tekst voor de afbeelding
-            johtoImage.classList.add('region-image'); // Voeg een klasse toe voor styling
+            johtoImage.src = './img/johto.png';
+            johtoImage.alt = "Johto Region";
+            johtoImage.classList.add('region-image');
             regionContainer.appendChild(johtoImage);
-
+        
             johtoStartAdded = true;
         }
 
@@ -81,6 +95,7 @@ function succesHandler(data) {
             // Maak een container voor de afbeelding en de naam
             let regionContainer = document.createElement('div');
             regionContainer.classList.add('region-container'); // Voeg een klasse toe voor styling
+            regionContainer.id = 'hoenn';  // Voeg dit ID toe
             gallery.appendChild(regionContainer);
 
             // Voeg de Hoenn afbeelding toe
@@ -102,6 +117,7 @@ function succesHandler(data) {
             // Maak een container voor de afbeelding en de naam
             let regionContainer = document.createElement('div');
             regionContainer.classList.add('region-container'); // Voeg een klasse toe voor styling
+            regionContainer.id = 'sinnoh';  // Voeg dit ID toe
             gallery.appendChild(regionContainer);
 
             // Voeg de Sinnoh afbeelding toe
@@ -123,6 +139,7 @@ function succesHandler(data) {
             // Maak een container voor de afbeelding en de naam
             let regionContainer = document.createElement('div');
             regionContainer.classList.add('region-container'); // Voeg een klasse toe voor styling
+            regionContainer.id = 'unova';  // Voeg dit ID toe
             gallery.appendChild(regionContainer);
 
             // Voeg de Unova afbeelding toe
@@ -144,6 +161,7 @@ function succesHandler(data) {
             // Maak een container voor de afbeelding en de naam
             let regionContainer = document.createElement('div');
             regionContainer.classList.add('region-container'); // Voeg een klasse toe voor styling
+            regionContainer.id = 'kalos';  // Voeg dit ID toe
             gallery.appendChild(regionContainer);
 
             // Voeg de Kalos afbeelding toe
@@ -165,6 +183,7 @@ function succesHandler(data) {
             // Maak een container voor de afbeelding en de naam
             let regionContainer = document.createElement('div');
             regionContainer.classList.add('region-container'); // Voeg een klasse toe voor styling
+            regionContainer.id = 'alola';  // Voeg dit ID toe
             gallery.appendChild(regionContainer);
 
             // Voeg de Alola afbeelding toe
@@ -186,6 +205,7 @@ function succesHandler(data) {
             // Maak een container voor de afbeelding en de naam
             let regionContainer = document.createElement('div');
             regionContainer.classList.add('region-container'); // Voeg een klasse toe voor styling
+            regionContainer.id = 'galar';  // Voeg dit ID toe
             gallery.appendChild(regionContainer);
 
             // Voeg de Galar afbeelding toe
@@ -207,6 +227,7 @@ function succesHandler(data) {
             // Maak een container voor de afbeelding en de naam
             let regionContainer = document.createElement('div');
             regionContainer.classList.add('region-container'); // Voeg een klasse toe voor styling
+            regionContainer.id = 'hisui';  // Voeg dit ID toe
             gallery.appendChild(regionContainer);
 
             // Voeg de Hisui afbeelding toe
@@ -234,20 +255,21 @@ function succesHandler(data) {
             // Maak een container voor de afbeelding en de naam
             let regionContainer = document.createElement('div');
             regionContainer.classList.add('region-container'); // Voeg een klasse toe voor styling
+            regionContainer.id = 'paldea';  // Voeg dit ID toe
             gallery.appendChild(regionContainer);
 
             // Voeg de Paldea afbeelding toe
             let paldeaImage = document.createElement('img');
-            paldeaImage.src = './img/paldea.png'; // Zorg ervoor dat je het juiste pad gebruikt
+            paldeaImage.src = './img/paldea.jpg'; // Zorg ervoor dat je het juiste pad gebruikt
             paldeaImage.alt = "Paldea Region"; // Alt-tekst voor de afbeelding
             paldeaImage.classList.add('region-image'); // Voeg een klasse toe voor styling
             regionContainer.appendChild(paldeaImage);
 
-            // // Voeg de regio naam toe in een overlay
-            // let regionName = document.createElement('div');
-            // regionName.classList.add('region-name'); // Voeg een klasse toe voor styling
-            // regionName.innerText = 'Paldea'; // Zet de naam van de regio in de balk
-            // regionContainer.appendChild(regionName);
+            // Voeg de regio naam toe in een overlay
+            let regionName = document.createElement('div');
+            regionName.classList.add('region-name-paldea'); // Voeg een klasse toe voor styling
+            regionName.innerText = 'Paldea'; // Zet de naam van de regio in de balk
+            regionContainer.appendChild(regionName);
 
             paldeaStartAdded = true;
         }

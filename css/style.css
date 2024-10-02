@@ -7,6 +7,51 @@ body {
     background-color: lightblue;
 }
 
+#toggle-nav {
+    position: fixed;
+    /* Zorgt ervoor dat de knop op een vaste positie blijft */
+    top: 10px;
+    left: 10px;
+    padding: 2vh 7vh 2vh 7vh;
+    background-color: #333;
+    color: white;
+    border: none;
+    cursor: pointer;
+    z-index: 1000;
+    /* Zorgt ervoor dat de knop boven andere elementen blijft */
+}
+
+#region-nav {
+    position: fixed;
+    top: 50px;
+    left: 8px;
+    background-color: #f8f9fa;
+    border: 1px solid #ccc;
+    margin-top: 1vh;
+    padding: 10px;
+    width: 150px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+}
+
+.hidden {
+    display: none;
+}
+
+#region-nav ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+#region-nav li {
+    margin-bottom: 10px;
+}
+
+#region-nav a {
+    text-decoration: none;
+    color: #007bff;
+}
+
 h1.main-title {
     text-align: center;
     font-family: 'Press Start 2P', sans-serif;
@@ -29,7 +74,7 @@ h2 span {
     border-radius: 12px;
 }
 
-#pokemon-gallery{
+#pokemon-gallery {
     max-width: 1200px;
     margin: 0 auto 1rem;
     display: grid;
@@ -37,22 +82,31 @@ h2 span {
     grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
     justify-items: center;
 }
+
 .region-break {
     width: 100%;
-    height: 2px;                /* Dikte van de lijn */
-    background-color: black;    /* Kleur van de lijn */
-    margin: 1rem 0;             /* Ruimte boven en onder de lijn */
-    display: block;              /* Zorg ervoor dat het een blok-element is */
-    grid-column: 1 / -1; /* Neemt de volledige breedte van de grid */
+    height: 2px;
+    /* Dikte van de lijn */
+    background-color: black;
+    /* Kleur van de lijn */
+    margin: 1rem 0;
+    /* Ruimte boven en onder de lijn */
+    display: block;
+    /* Zorg ervoor dat het een blok-element is */
+    grid-column: 1 / -1;
+    /* Neemt de volledige breedte van de grid */
 }
 
 .region-name {
-    text-align: center;       /* Centreer de regio naam */
-    font-weight: bold;       /* Maak de tekst vetgedrukt */
-    margin: 0.5rem 0;        /* Ruimte boven en onder de regio naam */
-    color: darkblue;         /* Kleur van de regio naam */
+    text-align: center;
+    /* Centreer de regio naam */
+    font-weight: bold;
+    /* Maak de tekst vetgedrukt */
+    margin: 0.5rem 0;
+    /* Ruimte boven en onder de regio naam */
+    color: darkblue;
+    /* Kleur van de regio naam */
 }
-
 
 
 #pokemon-gallery.dialog-open {
@@ -73,34 +127,61 @@ h2 span {
 }
 
 .region-image {
-    width: 96%;                /* Zorg ervoor dat de afbeelding de volledige breedte gebruikt */
-    height: 270px;             /* Stel de hoogte in op 180px, dezelfde hoogte als de Pokémon kaarten */
-    object-fit: cover;         /* Zorg ervoor dat de afbeelding de juiste verhouding behoudt */
-    margin-top: 1vh;           /* Voeg wat marge toe aan de boven- en onderkant */
-    display: block;      
-    border: 5px solid black;   /* Zorg ervoor dat het een blok-element is */
-    border-radius: 10px;       /* Geef het dezelfde afgeronde hoeken als de Pokémon kaarten */
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2); /* Voeg een schaduw toe voor consistentie */
+    width: 96%;
+    /* Zorg ervoor dat de afbeelding de volledige breedte gebruikt */
+    height: 270px;
+    /* Stel de hoogte in op 180px, dezelfde hoogte als de Pokémon kaarten */
+    object-fit: cover;
+    /* Zorg ervoor dat de afbeelding de juiste verhouding behoudt */
+    margin-top: 1vh;
+    /* Voeg wat marge toe aan de boven- en onderkant */
+    display: block;
+    border: 5px solid black;
+    /* Zorg ervoor dat het een blok-element is */
+    border-radius: 10px;
+    /* Geef het dezelfde afgeronde hoeken als de Pokémon kaarten */
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    /* Voeg een schaduw toe voor consistentie */
 }
 
-.region-container {             /* Zorg ervoor dat de container de volledige breedte gebruikt */
-    margin: 10px 0;       /* Voeg wat marge toe aan de boven- en onderkant */
-    position: relative;        /* Voor positionering van de naam overlay */
+.region-container {
+    /* Zorg ervoor dat de container de volledige breedte gebruikt */
+    margin: 10px 0;
+    /* Voeg wat marge toe aan de boven- en onderkant */
+    position: relative;
+    /* Voor positionering van de naam overlay */
 }
 
 .region-name-hisui {
-    position: absolute;               /* Maak de naam absoluut gepositioneerd */
-    bottom: 2vh;                       /* Plaats de naam onderaan de afbeelding */
-    left: 0;                         /* Begin aan de linkerkant */
-    right: 0;                       /* Eindig aan de rechterkant */
-    text-align: center;              /* Centreer de tekst */
-    font-weight: bold;               /* Maak de tekst vetgedrukt */
-    font-size: 2.5rem;               /* Stel de tekstgrootte in */
-    color: white;                    /* Maak de tekst wit voor contrast */
-    background-color: rgba(0, 0, 0, 0.5); /* Achtergrond met transparantie voor leesbaarheid */
-    padding: 0.5rem;                 /* Voeg padding toe voor wat ruimte rond de tekst */
-    border-radius: 0 0 10px 10px;    /* Maak alleen de onderkant afgerond */
+    position: absolute;
+    bottom: 2vh;
+    left: 0;
+    right: 0;
+    text-align: center;
+    font-weight: bold;
+    font-size: 2.5rem;
+    color: white;
+    background-color: rgba(0, 0, 0, 0.5);
+    padding: 0.5rem;
+    border-radius: 0 0 10px 10px;
     font-family: "Satisfy", cursive;
+    font-weight: 400;
+    font-style: normal;
+}
+
+.region-name-paldea {
+    position: absolute;
+    bottom: 3vh;
+    left: 0;
+    right: 0;
+    text-align: center;
+    font-weight: bold;
+    font-size: 2.5rem;
+    color: white;
+    background-color: rgba(0, 0, 0, 0.5);
+    padding: 0.5rem;
+    border-radius: 0 0 10px 10px;
+    font-family: "Merriweather", serif;
     font-weight: 400;
     font-style: normal;
 }
