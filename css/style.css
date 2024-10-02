@@ -12,7 +12,7 @@ body {
     /* Zorgt ervoor dat de knop op een vaste positie blijft */
     top: 10px;
     left: 10px;
-    padding: 2vh 7vh 2vh 7vh;
+    padding: 2vh 5vh 2vh 5vh;
     background-color: #333;
     color: white;
     border: none;
@@ -29,7 +29,7 @@ body {
     border: 1px solid #ccc;
     margin-top: 1vh;
     padding: 10px;
-    width: 150px;
+    width: 13.5vh;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     z-index: 1000;
 }
