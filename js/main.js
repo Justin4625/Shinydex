@@ -65,7 +65,7 @@ function succesHandler(data) {
         const pokemonId = parseInt(pokemon.url.split('/').slice(-2)[0]);
 
         // Exclude Pokémon from #10001 to #10090
-        if ((pokemonId >= 10001 && pokemonId <= 10090) || (pokemonId == 10093) || (pokemonId >= 10094 && pokemonId <= 10099) || (pokemonId >= 10116 && pokemonId <= 10125) || (pokemonId >= 10127 && pokemonId <= 10151) || (pokemonId >= 10153 && pokemonId <= 10160)) {
+        if ((pokemonId >= 10001 && pokemonId <= 10090) || (pokemonId == 10093) || (pokemonId >= 10094 && pokemonId <= 10099) || (pokemonId >= 10116 && pokemonId <= 10160) || (pokemonId === 10178) || (pokemonId >= 10181 && pokemonId <= 10228)) {
             continue; // Skip this iteration if the Pokémon ID is in the excluded ranges
         }
 
@@ -288,6 +288,9 @@ function succesHandler(data) {
 }
 
 function pokemonSuccesHandler(apiData) {
+    // Save the Pokémon data in the global pokemonData object
+    pokemonData[apiData.id] = apiData;
+
     let div = document.querySelector(`.pokemon-card[data-name='${apiData.name}']`);
 
     let title = document.createElement('h2');
@@ -295,15 +298,15 @@ function pokemonSuccesHandler(apiData) {
     div.appendChild(title);
 
     let image = document.createElement('img');
-    // Hier veranderen we de normale sprite naar de shiny sprite
     image.src = apiData.sprites.other.home.front_shiny;
     div.appendChild(image);
 
     let button = document.createElement('button');
-    button.innerText = "Show shiny✨"; // Dit kun je nu eventueel weghalen
+    button.innerText = "Show shiny✨";
     button.dataset.id = apiData.id;
     div.appendChild(button);
 }
+
 
 function pokemonClickHandler(e) {
     if (e.target.nodeName !== 'BUTTON') {
