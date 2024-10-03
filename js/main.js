@@ -387,20 +387,6 @@ function pokemonClickHandler(e) {
     // Get the clicked card and set its border to gold
     const clickedCard = e.target.closest('.pokemon-card');
     clickedCard.style.border = '5px solid gold'; // Set gold border
-
-    // Get the Pokémon data and show the dialog with the shiny version
-    let pokemon = pokemonData[e.target.dataset.id];
-    dialog.showModal();
-
-    dialogContent.innerHTML = "";
-
-    let title = document.createElement('h1');
-    title.innerText = `${pokemon.name} (#${pokemon.id})`;
-    dialogContent.appendChild(title);
-
-    let image = document.createElement('img');
-    image.src = pokemon.sprites.other.home.front_shiny;
-    dialogContent.appendChild(image);
 }
 
 
