@@ -293,6 +293,11 @@ h2 span {
     background-position-y: 0px;
 }
 
+.pokemon-card.selected {
+    border-color: gold;
+}
+
+
 @keyframes shiny-animation {
     0% {
         background-position-y: 0px;

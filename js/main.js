@@ -14,25 +14,35 @@ function init() {
     const toggleNavButton = document.getElementById('toggle-nav');
     const nav = document.getElementById('region-nav');
 
-    toggleNavButton.addEventListener('click', () => {
-        nav.classList.toggle('hidden');
-    });
+    if (toggleNavButton) {
+        toggleNavButton.addEventListener('click', () => {
+            if (nav) {
+                nav.classList.toggle('hidden');
+            }
+        });
+    }
 
     // Add event listeners to each region link to hide the navbar upon selection
-    const navLinks = nav.querySelectorAll('a');
-    navLinks.forEach(link => {
-        link.addEventListener('click', () => {
-            nav.classList.add('hidden'); // Hide the navbar
+    if (nav) {
+        const navLinks = nav.querySelectorAll('a');
+        navLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                nav.classList.add('hidden'); // Hide the navbar
+            });
         });
-    });
+    }
 
     gallery = document.getElementById('pokemon-gallery');
-    gallery.addEventListener("click", pokemonClickHandler);
+    if (gallery) {
+        gallery.addEventListener("click", pokemonClickHandler);
+    }
 
     dialog = document.getElementById('pokemon-detail');
     dialogContent = document.getElementById('modal-content');
     const dialogExit = document.getElementById('modal-close');
-    dialogExit.addEventListener('click', dialogCloseHandler);
+    if (dialogExit) {
+        dialogExit.addEventListener('click', dialogCloseHandler);
+    }
 
     getData(apiUrl, succesHandler);
 }
@@ -341,27 +351,45 @@ function pokemonSuccesHandler(apiData) {
 
     let title = document.createElement('h2');
     title.innerText = `${apiData.name} (#${apiData.id})`;
-    div.appendChild(title);
+    if (div) {
+        div.appendChild(title);
+    }
 
     let image = document.createElement('img');
     image.src = apiData.sprites.other.home.front_shiny;
-    div.appendChild(image);
+    if (div) {
+        div.appendChild(image);
+    }
 
     let button = document.createElement('button');
-    button.innerText = "Show shiny✨";
+    button.innerText = "GOTCHA";
     button.dataset.id = apiData.id;
-    div.appendChild(button);
+    if (div) {
+        div.appendChild(button);
+    }
 }
 
 
 function pokemonClickHandler(e) {
+    // Check if the clicked element is a button
     if (e.target.nodeName !== 'BUTTON') {
         return;
     }
 
-    let pokemon = pokemonData[e.target.dataset.id];
-    console.log(pokemon);
+    // Remove gold border from all cards before applying it to the clicked card
+    const allCards = document.querySelectorAll('.pokemon-card');
+    allCards.forEach(card => {
+        if (card instanceof HTMLElement) {
+            card.style.border = '5px solid white'; // Reset borders
+        }
+    });
 
+    // Get the clicked card and set its border to gold
+    const clickedCard = e.target.closest('.pokemon-card');
+    clickedCard.style.border = '5px solid gold'; // Set gold border
+
+    // Get the Pokémon data and show the dialog with the shiny version
+    let pokemon = pokemonData[e.target.dataset.id];
     dialog.showModal();
 
     dialogContent.innerHTML = "";
@@ -372,8 +400,9 @@ function pokemonClickHandler(e) {
 
     let image = document.createElement('img');
     image.src = pokemon.sprites.other.home.front_shiny;
-    dialogContent.appendChild(image)
+    dialogContent.appendChild(image);
 }
+
 
 function dialogCloseHandler() {
     dialog.close();
