@@ -6,6 +6,7 @@ let pokemonData = {};
 let gallery;
 let dialog;
 let dialogContent;
+let selectedPokemonIds = [];
 
 /**
  * Initialize after the DOM is ready
@@ -44,7 +45,17 @@ function init() {
         dialogExit.addEventListener('click', dialogCloseHandler);
     }
 
+    // Haal de opgeslagen selectie op uit localStorage
+    const storedSelectedPokemon = localStorage.getItem('selectedPokemon');
+    if (storedSelectedPokemon) {
+        selectedPokemonIds = JSON.parse(storedSelectedPokemon);
+    }
+
     getData(apiUrl, succesHandler);
+}
+
+function saveToLocalStorage() {
+    localStorage.setItem('selectedPokemon', JSON.stringify(selectedPokemonIds));
 }
 
 function getData(url, succesFunction) {
@@ -344,7 +355,6 @@ function succesHandler(data) {
 }
 
 function pokemonSuccesHandler(apiData) {
-    // Save the Pokémon data in the global pokemonData object
     pokemonData[apiData.id] = apiData;
 
     let div = document.querySelector(`.pokemon-card[data-name='${apiData.name}']`);
@@ -362,32 +372,60 @@ function pokemonSuccesHandler(apiData) {
     }
 
     let button = document.createElement('button');
-    button.innerText = "GOTCHA";
     button.dataset.id = apiData.id;
+
+    // Check if this Pokémon was previously selected and apply the gold border, gold name, and red button text
+    if (selectedPokemonIds.includes(apiData.id)) {
+        div.style.border = '5px solid gold'; // Restore gold border for previously selected Pokémon
+        button.innerText = "Delete shiny"; // Set button text to "Delete shiny"
+        button.style.color = 'red'; // Set button text color to red
+        title.style.color = 'gold'; // Set Pokémon name color to gold
+    } else {
+        button.innerText = "GOTCHA"; // Default button text
+        button.style.color = ''; // Reset button text color to default
+        title.style.color = ''; // Reset Pokémon name color to default
+    }
+
     if (div) {
         div.appendChild(button);
     }
 }
 
 
+
+
+
 function pokemonClickHandler(e) {
-    // Check if the clicked element is a button
     if (e.target.nodeName !== 'BUTTON') {
         return;
     }
 
-    // Remove gold border from all cards before applying it to the clicked card
-    const allCards = document.querySelectorAll('.pokemon-card');
-    allCards.forEach(card => {
-        if (card instanceof HTMLElement) {
-            card.style.border = '5px solid white'; // Reset borders
-        }
-    });
-
-    // Get the clicked card and set its border to gold
     const clickedCard = e.target.closest('.pokemon-card');
-    clickedCard.style.border = '5px solid gold'; // Set gold border
+    const pokemonId = parseInt(e.target.dataset.id);
+    const pokemonTitle = clickedCard.querySelector('h2');
+
+    // Toggle the border, name color, and button text
+    if (clickedCard.style.border === '5px solid gold') {
+        clickedCard.style.border = '5px solid white'; // Remove gold border
+        pokemonTitle.style.color = ''; // Reset Pokémon name color to default
+        selectedPokemonIds = selectedPokemonIds.filter(id => id !== pokemonId); // Remove ID from selected list
+        e.target.innerText = 'GOTCHA'; // Change button text back to 'GOTCHA'
+        e.target.style.color = ''; // Reset button text color to default
+    } else {
+        clickedCard.style.border = '5px solid gold'; // Set gold border
+        pokemonTitle.style.color = 'gold'; // Set Pokémon name color to gold
+        selectedPokemonIds.push(pokemonId); // Add ID to selected list
+        e.target.innerText = 'Delete shiny'; // Change button text to 'Delete shiny'
+        e.target.style.color = 'red'; // Change button text color to red
+    }
+
+    // Save updated selection to localStorage
+    saveToLocalStorage();
 }
+
+
+
+
 
 
 function dialogCloseHandler() {
