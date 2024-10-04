@@ -376,7 +376,11 @@ function pokemonSuccesHandler(apiData) {
 
     // Check if this Pokémon was previously selected and apply the gold border, gold name, and red button text
     if (selectedPokemonIds.includes(apiData.id)) {
-        div.style.border = '5px solid gold'; // Restore gold border for previously selected Pokémon
+        if (div) {
+            if (div instanceof HTMLElement) {
+                div.style.border = '5px solid gold'; // Restore gold border for previously selected Pokémon
+            }
+        }
         button.innerText = "Delete shiny"; // Set button text to "Delete shiny"
         button.style.color = 'red'; // Set button text color to red
         title.style.color = 'gold'; // Set Pokémon name color to gold
