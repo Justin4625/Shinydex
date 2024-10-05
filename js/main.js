@@ -51,11 +51,40 @@ function init() {
         selectedPokemonIds = JSON.parse(storedSelectedPokemon);
     }
 
+    updateTitle();
+    updateShinydexTitle();
     getData(apiUrl, succesHandler);
+}
+
+function updateTitle() {
+    const selectedCount = selectedPokemonIds.length;
+
+    // Stel lastId in op 1081
+    const lastId = 1081; 
+
+    const mainTitle = document.querySelector('.main-title');
+    if (mainTitle) {
+        if (mainTitle instanceof HTMLElement) {
+            mainTitle.innerText = `Shinydex ${selectedCount}/${lastId}`;
+        }
+    }
+}
+
+function updateShinydexTitle() {
+    const selectedCount = selectedPokemonIds.length;
+    const totalPokemon = 1081; // Total number of Pokémon
+    const titleElement = document.getElementById('shinydex-title');
+    const selectedCountElement = document.getElementById('selected-count');
+
+    if (titleElement && selectedCountElement) {
+        selectedCountElement.innerText = selectedCount.toString(); // Update the count
+        titleElement.innerText = `Shinydex ${selectedCount}/${totalPokemon}`; // Update the title
+    }
 }
 
 function saveToLocalStorage() {
     localStorage.setItem('selectedPokemon', JSON.stringify(selectedPokemonIds));
+    updateShinydexTitle(); // Update the title whenever saving to localStorage
 }
 
 function getData(url, succesFunction) {
@@ -395,10 +424,6 @@ function pokemonSuccesHandler(apiData) {
     }
 }
 
-
-
-
-
 function pokemonClickHandler(e) {
     if (e.target.nodeName !== 'BUTTON') {
         return;
@@ -425,12 +450,10 @@ function pokemonClickHandler(e) {
 
     // Save updated selection to localStorage
     saveToLocalStorage();
+
+    // Update the title
+    updateTitle();  // Call the updateTitle function to refresh the counter
 }
-
-
-
-
-
 
 function dialogCloseHandler() {
     dialog.close();
