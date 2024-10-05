@@ -54,9 +54,13 @@ body {
 
 h1.main-title {
     text-align: center;
-    font-family: 'Press Start 2P', sans-serif;
-    text-shadow: darkblue 2px 5px;
+    font-family: "Protest Strike", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    text-shadow: black 2px 6px;
     color: white;
+    font-size: 6vh;
+    font-weight: bold;
 }
 
 h2 {
@@ -114,7 +118,7 @@ h2 span {
 }
 
 .pokemon-card {
-    margin: 5px;
+    margin: 3vh 0vh 0vh 0vh;
     width: 180px;
     text-align: center;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
@@ -146,7 +150,7 @@ h2 span {
 
 .region-container {
     /* Zorg ervoor dat de container de volledige breedte gebruikt */
-    margin: 10px 0;
+    margin: 2.5vh 0vh 0vh 0vh;
     /* Voeg wat marge toe aan de boven- en onderkant */
     position: relative;
     /* Voor positionering van de naam overlay */
@@ -154,7 +158,7 @@ h2 span {
 
 .region-name-hisui {
     position: absolute;
-    bottom: 2vh;
+    bottom: 5vh;
     left: 0;
     right: 0;
     text-align: center;
@@ -171,7 +175,7 @@ h2 span {
 
 .region-name-paldea {
     position: absolute;
-    bottom: 3vh;
+    bottom: 5vh;
     left: 0;
     right: 0;
     text-align: center;
@@ -188,7 +192,7 @@ h2 span {
 
 .region-name-regionals {
     position: absolute;
-    bottom: 3vh;
+    bottom: 5vh;
     left: 0;
     right: 0;
     text-align: center;
@@ -202,6 +206,32 @@ h2 span {
     font-optical-sizing: auto;
     font-style: normal;
 }
+
+.kanto-counter,
+.johto-counter,
+.hoenn-counter,
+.sinnoh-counter,
+.unova-counter,
+.kalos-counter,
+.alola-counter,
+.galar-counter,
+.hisui-counter,
+.paldea-counter,
+.regional-forms-counter {
+    text-align: center;
+    /* Centreert de tekst */
+    margin: 1.5vh 0;
+    /* Optionele marge boven en onder de counter */
+    font-family: "Poppins", sans-serif;
+    font-weight: 700;
+    font-style: normal;
+    text-shadow: darkred 2px 3px;
+    /* Zelfde schaduw als de titel */
+    color: white;
+    /* Zelfde kleur als de titel */
+    font-size: 3.5vh;
+}
+
 
 
 .pokemon-card:hover {

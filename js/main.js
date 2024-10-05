@@ -51,6 +51,18 @@ function init() {
         selectedPokemonIds = JSON.parse(storedSelectedPokemon);
     }
 
+    updateKantoCounter();
+    updateJohtoCounter();
+    updateHoennCounter();
+    updateSinnohCounter();
+    updateUnovaCounter();
+    updateKalosCounter();
+    updateAlolaCounter();
+    updateGalarCounter();
+    updateHisuiCounter();
+    updatePaldeaCounter();
+    updateRegionalFormsCounter();
+
     updateTitle();
     updateShinydexTitle();
     getData(apiUrl, succesHandler);
@@ -60,15 +72,17 @@ function updateTitle() {
     const selectedCount = selectedPokemonIds.length;
 
     // Stel lastId in op 1081
-    const lastId = 1081; 
+    const lastId = 1081;
 
     const mainTitle = document.querySelector('.main-title');
     if (mainTitle) {
         if (mainTitle instanceof HTMLElement) {
-            mainTitle.innerText = `Shinydex ${selectedCount}/${lastId}`;
+            const percentage = ((selectedCount / lastId) * 100).toFixed(2); // Percentage berekenen en afronden op 2 decimalen
+            mainTitle.innerText = `✨ Shinydex ${selectedCount}/${lastId} (${percentage}%)✨`;
         }
     }
 }
+
 
 function updateShinydexTitle() {
     const selectedCount = selectedPokemonIds.length;
@@ -97,6 +111,174 @@ function getData(url, succesFunction) {
         })
         .then(succesFunction)
         .catch(errorHandler)
+}
+
+// Functie om de counter bij te werken
+function updateKantoCounter() {
+    const kantoCounter = document.querySelector('.kanto-counter');
+    if (!kantoCounter) return; // Voorkom null-referentie
+
+    const kantoCount = selectedPokemonIds.filter(id => id >= 1 && id <= 151).length;
+    const totalKanto = 151;
+    const percentage = ((kantoCount / totalKanto) * 100).toFixed(2);
+    const counterText = `Kanto ${kantoCount}/${totalKanto} (${percentage}%)`;
+
+    if (kantoCounter instanceof HTMLElement) {
+        kantoCounter.innerText = counterText; // Update de counter in de DOM
+    }
+
+    localStorage.setItem('kantoCounter', counterText);
+}
+
+function updateJohtoCounter() {
+    const johtoCounter = document.querySelector('.johto-counter');
+    if (!johtoCounter) return; // Voorkom null-referentie
+
+    const johtoCount = selectedPokemonIds.filter(id => id >= 152 && id <= 251).length;
+    const totalJohto = 100;
+    const percentage = ((johtoCount / totalJohto) * 100).toFixed(2);
+    const counterText = `Johto ${johtoCount}/${totalJohto} (${percentage}%)`;
+
+    if (johtoCounter instanceof HTMLElement) {
+        johtoCounter.innerText = counterText; // Update de counter in de DOM
+    }
+
+    localStorage.setItem('johtoCounter', counterText);
+}
+
+function updateHoennCounter() {
+    const hoennCounter = document.querySelector('.hoenn-counter');
+    if (!hoennCounter) return;
+
+    const hoennCount = selectedPokemonIds.filter(id => id >= 252 && id <= 386).length;
+    const totalHoenn = 135;
+    const percentage = ((hoennCount / totalHoenn) * 100).toFixed(2);
+    const counterText = `Hoenn ${hoennCount}/${totalHoenn} (${percentage}%)`;
+
+    if (hoennCounter instanceof HTMLElement) {
+        hoennCounter.innerText = counterText;
+    }
+    localStorage.setItem('hoennCounter', counterText);
+}
+
+function updateSinnohCounter() {
+    const sinnohCounter = document.querySelector('.sinnoh-counter');
+    if (!sinnohCounter) return;
+
+    const sinnohCount = selectedPokemonIds.filter(id => id >= 387 && id <= 493).length;
+    const totalSinnoh = 107;
+    const percentage = ((sinnohCount / totalSinnoh) * 100).toFixed(2);
+    const counterText = `Sinnoh ${sinnohCount}/${totalSinnoh} (${percentage}%)`;
+
+    if (sinnohCounter instanceof HTMLElement) {
+        sinnohCounter.innerText = counterText;
+    }
+    localStorage.setItem('sinnohCounter', counterText);
+}
+
+function updateUnovaCounter() {
+    const unovaCounter = document.querySelector('.unova-counter');
+    if (!unovaCounter) return;
+
+    const unovaCount = selectedPokemonIds.filter(id => id >= 494 && id <= 649).length;
+    const totalUnova = 156;
+    const percentage = ((unovaCount / totalUnova) * 100).toFixed(2);
+    const counterText = `Unova ${unovaCount}/${totalUnova} (${percentage}%)`;
+
+    if (unovaCounter instanceof HTMLElement) {
+        unovaCounter.innerText = counterText;
+    }
+    localStorage.setItem('unovaCounter', counterText);
+}
+
+function updateKalosCounter() {
+    const kalosCounter = document.querySelector('.kalos-counter');
+    if (!kalosCounter) return;
+
+    const kalosCount = selectedPokemonIds.filter(id => id >= 650 && id <= 721).length;
+    const totalKalos = 72;
+    const percentage = ((kalosCount / totalKalos) * 100).toFixed(2);
+    const counterText = `Kalos ${kalosCount}/${totalKalos} (${percentage}%)`;
+
+    if (kalosCounter instanceof HTMLElement) {
+        kalosCounter.innerText = counterText;
+    }
+    localStorage.setItem('kalosCounter', counterText);
+}
+
+function updateAlolaCounter() {
+    const alolaCounter = document.querySelector('.alola-counter');
+    if (!alolaCounter) return;
+
+    const alolaCount = selectedPokemonIds.filter(id => id >= 722 && id <= 809).length;
+    const totalAlola = 88;
+    const percentage = ((alolaCount / totalAlola) * 100).toFixed(2);
+    const counterText = `Alola ${alolaCount}/${totalAlola} (${percentage}%)`;
+
+    if (alolaCounter instanceof HTMLElement) {
+        alolaCounter.innerText = counterText;
+    }
+    localStorage.setItem('alolaCounter', counterText);
+}
+
+function updateGalarCounter() {
+    const galarCounter = document.querySelector('.galar-counter');
+    if (!galarCounter) return;
+
+    const galarCount = selectedPokemonIds.filter(id => id >= 810 && id <= 898).length;
+    const totalGalar = 89;
+    const percentage = ((galarCount / totalGalar) * 100).toFixed(2);
+    const counterText = `Galar ${galarCount}/${totalGalar} (${percentage}%)`;
+
+    if (galarCounter instanceof HTMLElement) {
+        galarCounter.innerText = counterText;
+    }
+    localStorage.setItem('galarCounter', counterText);
+}
+
+function updateHisuiCounter() {
+    const hisuiCounter = document.querySelector('.hisui-counter');
+    if (!hisuiCounter) return;
+
+    const hisuiCount = selectedPokemonIds.filter(id => id >= 899 && id <= 905).length;
+    const totalHisui = 7;
+    const percentage = ((hisuiCount / totalHisui) * 100).toFixed(2);
+    const counterText = `Hisui ${hisuiCount}/${totalHisui} (${percentage}%)`;
+
+    if (hisuiCounter instanceof HTMLElement) {
+        hisuiCounter.innerText = counterText;
+    }
+    localStorage.setItem('hisuiCounter', counterText);
+}
+
+function updatePaldeaCounter() {
+    const paldeaCounter = document.querySelector('.paldea-counter');
+    if (!paldeaCounter) return;
+
+    const paldeaCount = selectedPokemonIds.filter(id => id >= 906 && id <= 1025).length;
+    const totalPaldea = 119; // Pas aan indien nodig
+    const percentage = ((paldeaCount / totalPaldea) * 100).toFixed(2);
+    const counterText = `Paldea ${paldeaCount}/${totalPaldea} (${percentage}%)`;
+
+    if (paldeaCounter instanceof HTMLElement) {
+        paldeaCounter.innerText = counterText;
+    }
+    localStorage.setItem('paldeaCounter', counterText);
+}
+
+function updateRegionalFormsCounter() {
+    const regionalFormsCounter = document.querySelector('.regional-forms-counter');
+    if (!regionalFormsCounter) return;
+
+    const regionalFormsCount = selectedPokemonIds.filter(id => id >= 10091 && id <= 10253).length;
+    const totalRegionalForms = 56; // Pas aan indien nodig
+    const percentage = ((regionalFormsCount / totalRegionalForms) * 100).toFixed(2);
+    const counterText = `Regional forms ${regionalFormsCount}/${totalRegionalForms} (${percentage}%)`;
+
+    if (regionalFormsCounter instanceof HTMLElement) {
+        regionalFormsCounter.innerText = counterText;
+    }
+    localStorage.setItem('regionalFormsCounter', counterText);
 }
 
 function succesHandler(data) {
@@ -128,14 +310,21 @@ function succesHandler(data) {
 
             let regionContainer = document.createElement('div');
             regionContainer.classList.add('region-container');
-            regionContainer.id = 'kanto';  // Voeg dit ID toe
+            regionContainer.id = 'kanto'; // Voeg dit ID toe
             gallery.appendChild(regionContainer);
 
+            // Voeg de afbeelding toe
             let kantoImage = document.createElement('img');
             kantoImage.src = './img/kanto.png'; // Zorg ervoor dat je het juiste pad gebruikt
             kantoImage.alt = "Kanto Region";
             kantoImage.classList.add('region-image');
             regionContainer.appendChild(kantoImage);
+
+            // Voeg hier de Kanto counter toe onder het break-element
+            let kantoCounter = document.createElement('div');
+            kantoCounter.classList.add('kanto-counter');
+            kantoCounter.innerText = "0/151"; // Begin met een score van 0
+            breakElement.appendChild(kantoCounter); // Voeg de counter toe aan het breakElement
 
             kantoStartAdded = true; // Markeer dat Kanto is toegevoegd
         }
@@ -145,18 +334,23 @@ function succesHandler(data) {
             let breakElement = document.createElement('div');
             breakElement.classList.add('region-break');
             gallery.appendChild(breakElement);
-        
+
             let regionContainer = document.createElement('div');
             regionContainer.classList.add('region-container');
             regionContainer.id = 'johto';  // Voeg dit ID toe
             gallery.appendChild(regionContainer);
-        
+
             let johtoImage = document.createElement('img');
             johtoImage.src = './img/johto.png';
             johtoImage.alt = "Johto Region";
             johtoImage.classList.add('region-image');
             regionContainer.appendChild(johtoImage);
-        
+
+            let johtoCounter = document.createElement('div');
+            johtoCounter.classList.add('johto-counter');
+            johtoCounter.innerText = "0/100"; // Begin met een score van 0
+            breakElement.appendChild(johtoCounter); // Voeg de counter toe aan het breakElement
+
             johtoStartAdded = true;
         }
 
@@ -178,6 +372,11 @@ function succesHandler(data) {
             hoennImage.alt = "Hoenn Region"; // Alt-tekst voor de afbeelding
             hoennImage.classList.add('region-image'); // Voeg een klasse toe voor styling
             regionContainer.appendChild(hoennImage);
+
+            let hoennCounter = document.createElement('div');
+            hoennCounter.classList.add('hoenn-counter');
+            hoennCounter.innerText = "0/135"; // Begin met een score van 0
+            breakElement.appendChild(hoennCounter); // Voeg de counter toe aan het breakElement
 
             hoennStartAdded = true;
         }
@@ -201,6 +400,11 @@ function succesHandler(data) {
             sinnohImage.classList.add('region-image'); // Voeg een klasse toe voor styling
             regionContainer.appendChild(sinnohImage);
 
+            let sinnohCounter = document.createElement('div');
+            sinnohCounter.classList.add('sinnoh-counter');
+            sinnohCounter.innerText = "0/107"; // Begin met een score van 0
+            breakElement.appendChild(sinnohCounter); // Voeg de counter toe aan het breakElement
+
             sinnohStartAdded = true;
         }
 
@@ -222,6 +426,11 @@ function succesHandler(data) {
             unovaImage.alt = "Unova Region"; // Alt-tekst voor de afbeelding
             unovaImage.classList.add('region-image'); // Voeg een klasse toe voor styling
             regionContainer.appendChild(unovaImage);
+
+            let unovaCounter = document.createElement('div');
+            unovaCounter.classList.add('unova-counter');
+            unovaCounter.innerText = "0/156"; // Begin met een score van 0
+            breakElement.appendChild(unovaCounter); // Voeg de counter toe aan het breakElement
 
             unovaStartAdded = true;
         }
@@ -245,6 +454,11 @@ function succesHandler(data) {
             kalosImage.classList.add('region-image'); // Voeg een klasse toe voor styling
             regionContainer.appendChild(kalosImage);
 
+            let kalosCounter = document.createElement('div');
+            kalosCounter.classList.add('kalos-counter');
+            kalosCounter.innerText = "0/72"; // Begin met een score van 0
+            breakElement.appendChild(kalosCounter); // Voeg de counter toe aan het breakElement
+
             kalosStartAdded = true;
         }
 
@@ -264,6 +478,11 @@ function succesHandler(data) {
             alolaImage.alt = "Alola Region";
             alolaImage.classList.add('region-image');
             regionContainer.appendChild(alolaImage);
+
+            let alolaCounter = document.createElement('div');
+            alolaCounter.classList.add('alola-counter');
+            alolaCounter.innerText = "0/88"; // Begin met een score van 0
+            breakElement.appendChild(alolaCounter); // Voeg de counter toe aan het breakElement
 
             alolaStartAdded = true;
         }
@@ -286,6 +505,11 @@ function succesHandler(data) {
             galarImage.alt = "Galar Region"; // Alt-tekst voor de afbeelding
             galarImage.classList.add('region-image'); // Voeg een klasse toe voor styling
             regionContainer.appendChild(galarImage);
+
+            let galarCounter = document.createElement('div');
+            galarCounter.classList.add('galar-counter');
+            galarCounter.innerText = "0/96"; // Begin met een score van 0
+            breakElement.appendChild(galarCounter); // Voeg de counter toe aan het breakElement
 
             galarStartAdded = true;
         }
@@ -315,6 +539,11 @@ function succesHandler(data) {
             regionName.innerText = 'Hisui'; // Zet de naam van de regio in de balk
             regionContainer.appendChild(regionName);
 
+            let hisuiCounter = document.createElement('div');
+            hisuiCounter.classList.add('hisui-counter');
+            hisuiCounter.innerText = "0/7"; // Begin met een score van 0
+            breakElement.appendChild(hisuiCounter); // Voeg de counter toe aan het breakElement
+
             hisuiStartAdded = true;
         }
 
@@ -343,6 +572,11 @@ function succesHandler(data) {
             regionName.innerText = 'Paldea'; // Zet de naam van de regio in de balk
             regionContainer.appendChild(regionName);
 
+            let paldeaCounter = document.createElement('div');
+            paldeaCounter.classList.add('paldea-counter');
+            paldeaCounter.innerText = "0/119"; // Begin met een score van 0
+            breakElement.appendChild(paldeaCounter); // Voeg de counter toe aan het breakElement
+
             paldeaStartAdded = true;
         }
 
@@ -370,6 +604,11 @@ function succesHandler(data) {
             regionName.innerText = 'Regional Forms'; // Zet de naam van de regio in de balk
             regionContainer.appendChild(regionName);
 
+            let regionalFormsCounter = document.createElement('div');
+            regionalFormsCounter.classList.add('regional-forms-counter');
+            regionalFormsCounter.innerText = "0/56"; // Begin met een score van 0
+            breakElement.appendChild(regionalFormsCounter); // Voeg de counter toe aan het breakElement
+
             regionalFormsStartAdded = true;
         }
 
@@ -379,8 +618,20 @@ function succesHandler(data) {
         gallery.appendChild(newDiv);
 
         // Pokémon details ophalen
+
         getData(pokemon.url, pokemonSuccesHandler);
     }
+    updateKantoCounter();
+    updateJohtoCounter();
+    updateHoennCounter();
+    updateSinnohCounter();
+    updateUnovaCounter();
+    updateKalosCounter();
+    updateAlolaCounter();
+    updateGalarCounter();
+    updateHisuiCounter();
+    updatePaldeaCounter();
+    updateRegionalFormsCounter();
 }
 
 function pokemonSuccesHandler(apiData) {
@@ -451,8 +702,19 @@ function pokemonClickHandler(e) {
     // Save updated selection to localStorage
     saveToLocalStorage();
 
-    // Update the title
-    updateTitle();  // Call the updateTitle function to refresh the counter
+    // Update the title and counters after saving
+    updateTitle();
+    updateKantoCounter();
+    updateJohtoCounter(); // Zorg dat de Johto counter ook wordt bijgewerkt
+    updateHoennCounter();
+    updateSinnohCounter();
+    updateUnovaCounter();
+    updateKalosCounter();
+    updateAlolaCounter();
+    updateGalarCounter();
+    updateHisuiCounter();
+    updatePaldeaCounter();
+    updateRegionalFormsCounter();
 }
 
 function dialogCloseHandler() {
